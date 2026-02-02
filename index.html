@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WebCitas — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="centered">
+    <div class="card" id="authCard">
+      <h1>WebCitas</h1>
+      <p class="muted">Inicia sesión o regístrate</p>
+
+      <div class="tabs">
+        <button id="tabLogin" class="tab active">Iniciar sesión</button>
+        <button id="tabRegister" class="tab">Registrarse</button>
+      </div>
+
+      <form id="authForm" class="authForm">
+        <label>Nombre y apellidos
+          <input id="authName" required placeholder="Ej. Juan Pérez" />
+        </label>
+        <label>Tipo
+          <select id="authRole">
+            <option value="user">Usuario</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </label>
+        <div class="actions">
+          <button class="btn primary" type="submit">Continuar</button>
+        </div>
+      </form>
+      <p id="authMsg" class="muted"></p>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>
+

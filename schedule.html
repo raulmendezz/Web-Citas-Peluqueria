@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WebCitas — Agenda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header-simple">
+    <h2>Semana — Citas (09:00–23:00)</h2>
+    <button id="logoutBtn" class="btn ghost">Cerrar sesión</button>
+  </header>
+  <section id="scheduleWrap" class="schedule-wrap"></section>
+  <button id="createBtn" class="btn primary floating">Crear cita</button>
+
+  <div id="createModal" class="modal hidden" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <h3>Crear cita</h3>
+      <label>Nombre y apellidos
+        <input id="cName" placeholder="Juan Pérez" />
+      </label>
+      <label>Día
+        <select id="cDay"></select>
+      </label>
+      <label>Hora
+        <select id="cTime"></select>
+      </label>
+      <div class="modal-actions">
+        <button id="cSave" class="btn primary">Crear</button>
+        <button id="cCancel" class="btn ghost">Cancelar</button>
+      </div>
+      <p id="cMsg" class="muted"></p>
+    </div>
+  </div>
+
+  <script src="schedule.js"></script>
+</body>
+</html>
