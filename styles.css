@@ -48,4 +48,10 @@ body{
 .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
 .modal .muted{margin-top:8px}
 
+.admin-panel{position:fixed;left:20px;bottom:24px;display:flex;gap:8px;z-index:90}
+.admin-panel .btn{padding:10px 12px;border-radius:10px}
+.btn.danger{background:linear-gradient(90deg,#ef4444,#f97316);color:white}
+.slot-blocked{background:linear-gradient(90deg,var(--blocked),#fb923c);color:#230402;font-weight:700}
+.grid td.selected{outline:3px solid rgba(124,58,237,0.9); box-shadow: 0 6px 18px rgba(124,58,237,0.12);}
+
 
