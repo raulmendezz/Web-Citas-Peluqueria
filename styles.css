@@ -28,10 +28,12 @@ body{
 .card{background:linear-gradient(180deg,#071026,#071028);padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);width:380px;text-align:center}
 .muted{color:var(--muted);font-size:13px}
 .tabs{display:flex;gap:8px;margin:12px 0}
-.tab{flex:1;padding:8px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
-.tab.active{background:linear-gradient(90deg,#0b1220,#0f1724);border-color:rgba(255,255,255,0.06)}
+.tab{flex:1;padding:8px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:white;font-weight:600;transition:color 0.2s,background 0.2s;}
+.tab.active{background:white;color:#0f1724;font-weight:700;border-color:rgba(255,255,255,0.06)}
 .authForm label{display:block;text-align:left;margin-top:10px}
-.authForm input,.authForm select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.authForm input,.authForm select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(124,58,237,0.18);background:rgba(255,255,255,0.95);color:#0f1724;box-shadow:0 2px 8px rgba(124,58,237,0.08);transition:box-shadow 0.2s,border-color 0.2s;}
+.authForm select:focus{border-color:var(--accent);box-shadow:0 4px 16px rgba(124,58,237,0.16);}
+.authForm label#authRoleLabel{font-weight:600;color:#7c3aed;}
 .actions{display:flex;justify-content:flex-end;margin-top:12px}
 .schedule-wrap{padding:12px}
 .grid{width:100%;border-collapse:collapse}

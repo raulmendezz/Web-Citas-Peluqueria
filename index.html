@@ -11,35 +11,39 @@
   <main class="centered">
     <div class="card" id="authCard">
       <h1>WebCitas</h1>
-      <p class="muted">Inicia sesión o regístrate</p>
-
-      <div class="tabs">
-        <button id="tabLogin" class="tab active">Iniciar sesión</button>
-        <button id="tabRegister" class="tab">Registrarse</button>
-      </div>
-
-      <form id="authForm" class="authForm">
-        <label>Nombre y apellidos
-          <input id="authName" required placeholder="Ej. Juan Pérez" />
+      <p>INICIA SESION</p>
+      <form class="authForm" method="post" action="php/login.php">
+        <label>Nombre de usuario
+          <input name="usuario" required placeholder="Ej. Juan Pérez" />
         </label>
         <label>Contraseña
-          <input id="authPass" type="password" required placeholder="Contraseña" />
-        </label>
-        <label>Tipo
-          <select id="authRole">
-            <option value="user">Usuario</option>
-            <option value="admin">Administrador</option>
-          </select>
+          <input name="contraseña" type="password" required placeholder="Contraseña" />
         </label>
         <div class="actions">
           <button class="btn primary" type="submit">Continuar</button>
         </div>
       </form>
-      <p id="authMsg" class="muted"></p>
+      <p id="loginError" class="muted"></p>
+      <p class="muted">
+        ¿No tienes cuenta?
+        <a href="register.html" style="color:#7c3aed;font-weight:600;">Regístrate aquí</a>
+      </p>
     </div>
   </main>
-
-  <script src="auth.js"></script>
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const error = params.get('error');
+      if (error) {
+        const p = document.getElementById('loginError');
+        if (p) p.textContent = error;
+        // Opcional: limpiar el parámetro de la URL para que no se repita al refrescar
+        if (window.history && window.history.replaceState) {
+          const url = window.location.origin + window.location.pathname;
+          window.history.replaceState({}, '', url);
+        }
+      }
+    })();
+  </script>
 </body>
 </html>
-
