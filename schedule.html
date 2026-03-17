@@ -162,6 +162,7 @@
       color: var(--muted);
       border: 1px dashed rgba(255,255,255,0.08);
       cursor: pointer;
+      position: relative;
     }
     .slot-free:hover {
       background: rgba(99,102,241,0.1);
@@ -181,6 +182,18 @@
       border: 1px solid rgba(99,102,241,0.3);
       color: rgba(99,102,241,0.8);
       font-weight: 600;
+    }
+    /* NUEVO: Estilos para huecos bloqueados */
+    .slot-blocked {
+      background: linear-gradient(135deg, rgba(245,158,11,0.3), rgba(245,158,11,0.1));
+      border: 1px solid rgba(245,158,11,0.5);
+      color: #f59e0b;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .slot-blocked:hover {
+      background: rgba(245,158,11,0.4);
+      border-color: rgba(245,158,11,0.7);
     }
     .slot-inner { display: flex; flex-direction: column; gap: 2px; }
     .slot-name { font-size: 11px; line-height: 1.2; }
@@ -250,11 +263,131 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 700px) {
-      main { padding: 12px; }
-      .week-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-      .schedule-grid thead th, .schedule-grid tbody td { padding: 6px 4px; font-size: 10px; }
-      .slot { padding: 8px 4px; font-size: 10px; min-height: 36px; }
+    @media (max-width: 1024px) {
+      main { padding: 16px; }
+      .schedule-grid thead th:first-child { width: 60px; }
+      .schedule-grid thead th { padding: 12px 8px; font-size: 11px; }
+      .slot { min-height: 40px; padding: 8px 6px; font-size: 11px; }
+      .slot-name { font-size: 10px; }
+      .legend { gap: 12px; flex-wrap: wrap; }
+    }
+    
+    @media (max-width: 768px) {
+      header { padding: 10px 14px; }
+      .logo { font-size: 17px; }
+      .user-badge { padding: 5px 10px 5px 5px; font-size: 12px; }
+      #usernameDisplay { max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      main { padding: 12px 10px; }
+      .week-header { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 14px; }
+      .week-title { font-size: 18px; }
+      .legend { gap: 10px; flex-wrap: wrap; font-size: 11px; }
+      .legend-dot { width: 8px; height: 8px; }
+      .schedule-grid { border-radius: 10px; }
+      .schedule-grid thead th { font-size: 9px; padding: 10px 4px; letter-spacing: 0.3px; }
+      .schedule-grid thead th:first-child { width: 50px; }
+      .schedule-grid tbody td:first-child { font-size: 9px; padding: 7px 4px; }
+      .schedule-grid tbody td:not(:first-child) { padding: 4px; }
+      .slot { 
+        padding: 6px 3px; 
+        font-size: 9px; 
+        min-height: 36px; 
+        border-radius: 5px; 
+      }
+      .slot-name { font-size: 8px; }
+      .slot-label { font-size: 7px; }
+      .slot-free .btn-block-slot {
+        padding: 3px 4px;
+        font-size: 8px;
+        top: 1px;
+        right: 1px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 8px 10px; }
+      .logo { font-size: 15px; }
+      .header-right { gap: 8px; }
+      .user-badge { padding: 4px 8px 4px 4px; font-size: 11px; gap: 6px; }
+      .user-avatar { width: 24px; height: 24px; font-size: 9px; }
+      .btn { padding: 6px 12px; font-size: 12px; }
+      main { padding: 10px 8px; }
+      .week-header { margin-bottom: 12px; }
+      .week-title { font-size: 16px; }
+      .week-title + div { font-size: 12px !important; }
+      .legend { gap: 8px; }
+      .legend-item { font-size: 10px; gap: 4px; }
+      .schedule-grid { border-radius: 8px; }
+      .schedule-grid thead th { 
+        padding: 8px 3px; 
+        font-size: 8px; 
+        letter-spacing: 0.2px;
+      }
+      .schedule-grid thead th:first-child { width: 44px; }
+      .schedule-grid tbody td:first-child { 
+        font-size: 8px; 
+        padding: 6px 2px; 
+        letter-spacing: -0.5px;
+      }
+      .schedule-grid tbody td:not(:first-child) { padding: 3px 2px; }
+      .slot {
+        padding: 4px 2px;
+        font-size: 8px;
+        min-height: 32px;
+        border-radius: 4px;
+      }
+      .slot-inner { gap: 1px; }
+      .slot-name { font-size: 7px; }
+      .slot-label { font-size: 6px; }
+      .slot-free .btn-block-slot {
+        padding: 2px 3px;
+        font-size: 7px;
+        top: 0px;
+        right: 0px;
+        border-radius: 2px;
+      }
+      #gridContainer { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .schedule-grid { min-width: 320px; }
+    }
+
+    @media (max-width: 480px) {
+      #gridContainer { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .schedule-grid { min-width: 360px; }
+      .modal-box { 
+        width: calc(100vw - 16px); 
+        max-width: 90vw;
+        padding: 20px 16px 28px; 
+        border-radius: 16px 16px 0 0; 
+      }
+      .modal-box h3 { font-size: 16px; }
+      .modal-box .modal-sub { font-size: 12px; }
+      .slot-info-icon { font-size: 18px; }
+      .slot-info-text { font-size: 12px; }
+      .modal-actions { gap: 8px; }
+      .btn { padding: 6px 10px; font-size: 11px; }
+      header { padding: 8px 10px; }
+      .logo { font-size: 14px; }
+    }
+    
+    @media (max-width: 420px) {
+      .schedule-grid { min-width: 300px; }
+      .schedule-grid thead th:first-child { width: 40px; }
+      .schedule-grid tbody td:first-child { padding: 5px 2px; font-size: 7px; }
+      .schedule-grid thead th { padding: 6px 2px; font-size: 7px; }
+      .slot { min-height: 30px; font-size: 7px; }
+      .slot-name { font-size: 6px; }
+    }
+
+    @media (max-width: 520px) {
+      .modal-backdrop {
+        align-items: flex-end;
+      }
+      .modal-box {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+        padding: 24px 18px 36px;
+        margin: 0;
+      }
     }
   </style>
 </head>
@@ -281,6 +414,7 @@
     <div class="legend">
       <div class="legend-item"><div class="legend-dot" style="background:rgba(16,185,129,0.5);border:1px solid #10b981"></div>Tu cita</div>
       <div class="legend-item"><div class="legend-dot" style="background:rgba(99,102,241,0.4);border:1px solid #6366f1"></div>Ocupado</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(245,158,11,0.4);border:1px solid #f59e0b"></div>No disponible</div>
       <div class="legend-item"><div class="legend-dot" style="background:transparent;border:1px dashed rgba(255,255,255,0.2)"></div>Libre</div>
     </div>
   </div>
@@ -353,6 +487,52 @@
   </div>
 </div>
 
+<!-- MODAL BLOQUEAR HUECO (ADMIN) -->
+<div class="modal-backdrop hidden" id="modalBlock">
+  <div class="modal-box">
+    <h3>Bloquear hueco</h3>
+    <p class="modal-sub">Marcar como no disponible</p>
+    <div class="slot-info">
+      <div class="slot-info-icon">🔒</div>
+      <div class="slot-info-text">
+        <strong id="bSlotDay">—</strong>
+        <span id="bSlotHour">—</span>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin:12px 0;">
+      Los clientes no podrán reservar este horario.
+    </p>
+    <div id="blockMsg"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="mBlockCancel">Cancelar</button>
+      <button class="btn btn-primary" id="mBlockConfirm">Bloquear hueco</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DESBLOQUEAR HUECO (ADMIN) -->
+<div class="modal-backdrop hidden" id="modalUnblock">
+  <div class="modal-box">
+    <h3>Desbloquear hueco</h3>
+    <p class="modal-sub">Permitir reservas nuevamente</p>
+    <div class="slot-info">
+      <div class="slot-info-icon">✓</div>
+      <div class="slot-info-text">
+        <strong id="uSlotDay">—</strong>
+        <span id="uSlotHour">—</span>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin:12px 0;">
+      Este hueco volverá a estar disponible para reservas.
+    </p>
+    <div id="unblockMsg"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="mUnblockCancel">Cancelar</button>
+      <button class="btn btn-danger" id="mUnblockConfirm">Desbloquear</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const DAYS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
 const HOURS = ['17:30','18:00','18:30','19:00','19:30','20:00','20:30'];
@@ -364,7 +544,7 @@ let selectedSlot = null;
 
 // ─── Init ───────────────────────────────────────────────
 async function init() {
-  // Leer sesión desde cookie/meta o endpoint
+  // Leer sesión desde endpoint
   const res = await fetch('php/session_info.php');
   if (!res.ok) { location.href = 'index.html'; return; }
   const info = await res.json();
@@ -383,9 +563,16 @@ async function init() {
 }
 
 async function loadCitas() {
+  console.log('🔄 Cargando citas...');
   const res = await fetch('php/get_citas.php');
-  if (!res.ok) { location.href = 'index.html'; return; }
+  if (!res.ok) { 
+    console.error('❌ Error get_citas:', res.status);
+    location.href = 'index.html'; 
+    return; 
+  }
   citas = await res.json();
+  console.log('📋 Citas recibidas:', citas);
+  console.log('🔍 Citas bloqueadas:', citas.filter(c => c.estado === 'bloqueado'));
   renderGrid();
 }
 
@@ -406,17 +593,26 @@ function renderGrid() {
     for (let dia = 0; dia < 5; dia++) {
       const key = `${dia}_${hora}`;
       const slot = citaMap[key];
+      
       if (!slot) {
+        // Hueco libre
         html += `<td><div class="slot slot-free" data-dia="${dia}" data-hora="${hora}" data-id="">Libre</div></td>`;
-      } else if (slot.isLibre) {
-        html += `<td><div class="slot slot-free" data-dia="${dia}" data-hora="${hora}" data-id="${slot.id}">Libre</div></td>`;
+      } else if (slot.estado === 'bloqueado') {
+        // NUEVO: Hueco bloqueado
+        html += `<td><div class="slot slot-blocked" data-dia="${dia}" data-hora="${hora}" data-id="${slot.id}">
+          <div class="slot-inner">
+            <div class="slot-name">🔒 No disponible</div>
+          </div>
+        </div></td>`;
       } else if (slot.usuario === currentUser) {
+        // Propia cita
         html += `<td><div class="slot slot-own" data-dia="${dia}" data-hora="${hora}" data-id="${slot.id}" data-user="${slot.usuario}">
           <div class="slot-inner">
             <div class="slot-name">✓ ${escHtml(slot.usuario)}</div>
           </div>
         </div></td>`;
       } else {
+        // Cita ajena
         const label = currentRole === 'admin' ? escHtml(slot.usuario) : 'Ocupado';
         html += `<td><div class="slot slot-taken ${currentRole === 'admin' ? 'admin-slot' : ''}" 
           data-dia="${dia}" data-hora="${hora}" data-id="${slot.id}" data-user="${slot.usuario || ''}">
@@ -434,12 +630,22 @@ function renderGrid() {
 
   // Events
   document.querySelectorAll('.slot-free').forEach(el => {
-    el.addEventListener('click', () => openCreate(el));
+    el.addEventListener('click', (e) => {
+      // Si es admin, abrir modal de bloquear. Si no, abrir modal de crear
+      if (currentRole === 'admin') {
+        openBlock(el);
+      } else {
+        openCreate(el);
+      }
+    });
   });
   document.querySelectorAll('.slot-own').forEach(el => {
     el.addEventListener('click', () => openView(el));
   });
   if (currentRole === 'admin') {
+    document.querySelectorAll('.slot-blocked').forEach(el => {
+      el.addEventListener('click', () => openUnblock(el));
+    });
     document.querySelectorAll('.admin-slot').forEach(el => {
       el.addEventListener('click', () => openAdmin(el));
     });
@@ -559,13 +765,113 @@ document.getElementById('mAdminCancel').onclick = async () => {
   }
 };
 
+// ─── Modal Bloquear ──────────────────────────────────────
+function openBlock(el) {
+  const dia = parseInt(el.dataset.dia);
+  const hora = el.dataset.hora;
+  selectedSlot = { dia, hora };
+  document.getElementById('bSlotDay').textContent = DAYS[dia];
+  document.getElementById('bSlotHour').textContent = hora;
+  document.getElementById('blockMsg').innerHTML = '';
+  document.getElementById('mBlockConfirm').disabled = false;
+  document.getElementById('modalBlock').classList.remove('hidden');
+}
+
+document.getElementById('mBlockCancel').onclick = () => {
+  document.getElementById('modalBlock').classList.add('hidden');
+};
+
+document.getElementById('mBlockConfirm').onclick = async () => {
+  const btn = document.getElementById('mBlockConfirm');
+  btn.disabled = true;
+  btn.textContent = 'Bloqueando…';
+  
+  console.log('📍 Intentando bloquear:', selectedSlot);
+  
+  const payload = { dia: selectedSlot.dia, hora: selectedSlot.hora };
+  console.log('📤 Enviando:', payload);
+  
+  const res = await fetch('php/bloquear_hueco_simple_v2.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  });
+  
+  console.log('📥 Status:', res.status);
+  
+  const data = await res.json();
+  console.log('📥 Respuesta:', data);
+  
+  const msgEl = document.getElementById('blockMsg');
+  
+  if (data.ok) {
+    console.log('✅ Bloqueo exitoso');
+    msgEl.innerHTML = `<div class="msg ok">✓ Hueco bloqueado correctamente</div>`;
+    setTimeout(async () => {
+      console.log('🔄 Recargando citas...');
+      document.getElementById('modalBlock').classList.add('hidden');
+      await loadCitas();
+      btn.textContent = 'Bloquear hueco';
+    }, 1000);
+  } else {
+    console.log('❌ Error:', data.error);
+    msgEl.innerHTML = `<div class="msg err">✗ ${escHtml(data.error)}</div>`;
+    btn.disabled = false;
+    btn.textContent = 'Bloquear hueco';
+  }
+};
+
+// ─── Modal Desbloquear ───────────────────────────────────
+function openUnblock(el) {
+  const dia = parseInt(el.dataset.dia);
+  const hora = el.dataset.hora;
+  selectedSlot = { dia, hora, id: el.dataset.id };
+  document.getElementById('uSlotDay').textContent = DAYS[dia];
+  document.getElementById('uSlotHour').textContent = hora;
+  document.getElementById('unblockMsg').innerHTML = '';
+  document.getElementById('mUnblockConfirm').disabled = false;
+  document.getElementById('modalUnblock').classList.remove('hidden');
+}
+
+document.getElementById('mUnblockCancel').onclick = () => {
+  document.getElementById('modalUnblock').classList.add('hidden');
+};
+
+document.getElementById('mUnblockConfirm').onclick = async () => {
+  const btn = document.getElementById('mUnblockConfirm');
+  btn.disabled = true;
+  btn.textContent = 'Desbloqueando…';
+  
+  const res = await fetch('php/desbloquear_hueco_simple_v2.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ id: selectedSlot.id })
+  });
+  
+  const data = await res.json();
+  const msgEl = document.getElementById('unblockMsg');
+  
+  if (data.ok) {
+    msgEl.innerHTML = `<div class="msg ok">✓ Hueco desbloqueado</div>`;
+    setTimeout(async () => {
+      document.getElementById('modalUnblock').classList.add('hidden');
+      await loadCitas();
+      btn.textContent = 'Desbloquear';
+    }, 800);
+  } else {
+    msgEl.innerHTML = `<div class="msg err">✗ ${escHtml(data.error)}</div>`;
+    btn.disabled = false;
+    btn.textContent = 'Desbloquear';
+  }
+};
+
 // ─── Logout ──────────────────────────────────────────────
 document.getElementById('logoutBtn').onclick = () => {
   fetch('php/logout.php').then(() => location.href = 'index.html');
 };
 
 // ─── Cerrar modales al clicar fuera ──────────────────────
-['modalCreate','modalView','modalAdmin'].forEach(id => {
+['modalCreate','modalView','modalAdmin','modalBlock','modalUnblock'].forEach(id => {
   document.getElementById(id).addEventListener('click', function(e) {
     if (e.target === this) this.classList.add('hidden');
   });

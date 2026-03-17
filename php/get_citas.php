@@ -16,9 +16,11 @@ if ($lastWeek !== $currentWeek) {
     file_put_contents($weekFile, $currentWeek);
 }
 
-$result = $conn->query('SELECT id, usuario, dia, hora FROM citas ORDER BY dia, hora');
+// ← CORREGIDO: Agregar 'estado' a la consulta
+$result = $conn->query('SELECT id, usuario, dia, hora, estado FROM citas ORDER BY dia, hora');
 $citas = [];
 while ($row = $result->fetch_assoc()) {
     $citas[] = $row;
 }
 echo json_encode($citas);
+?>
